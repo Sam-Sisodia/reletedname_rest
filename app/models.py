@@ -41,3 +41,12 @@ class Town(models.Model):
         return self.town_name
 
 
+
+
+
+class Tourist(models.Model):
+    name = models.CharField(max_length=100)
+    cities_visited = models.ManyToManyField(City, related_name="tourists")
+
+    def __str__(self):
+        return self.name

@@ -23,6 +23,7 @@ class Statedetails(ListCreateAPIView):
 
         else:
             states = State.objects.all()
+
             serializer = stateSerializer(states,many=True)
             return Response(serializer.data ,status= status.HTTP_200_OK)
 
@@ -34,8 +35,24 @@ class Statedetails(ListCreateAPIView):
 
 
 class citydetails(ListCreateAPIView):
-    queryset = ""
+
     serializer_class = citySerializer
+    def get_queryset(self):
+        queryset  = City.objects.select_related("state")
+        # print(queryset)
+
+
+        tourists = Tourist.objects.all()
+        for tourist in tourists:
+            print(tourist.name, [city.city_name for city in tourist.cities_visited.all()])
+        #with prefecth realted 
+        tourists = Tourist.objects.all("cities_visited").all()
+        
+
+
+
+        
+        return queryset 
 
 
 class towndetails(ListCreateAPIView):
