@@ -7,19 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # This will run on your local runner
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build and start containers with docker-compose
+      - name: Build and start containers with Docker Compose
         run: |
           docker compose build --no-cache
           docker compose up -d
-
-      # - name: View logs
-      #   run: docker-compose logs
-
-      # - name: Stop containers
-      #   run: docker-compose down

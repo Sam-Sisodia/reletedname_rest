@@ -15,6 +15,7 @@ from rest_framework import   status
 class Statedetails(ListCreateAPIView):
     serializer_class = stateSerializer
     queryset = ""
+    print("hellooooooooooooooo")
     def get(self,request,State_name=None):
         if State_name :
             statetid = get_object_or_404(State,State_name=State_name)
